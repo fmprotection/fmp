@@ -15,9 +15,45 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
+	public function landingpage() {
+		return View::make('landingpage');
+	}
+
+	public function showsignup() {
+		if(!Auth::check()) {
+			return View::make('signup');
+		}
+	}
+
+	public function dosignup() {
+		if(!Auth::check()) {
+			$user = new User();
+			$user->fullname = Input::get('fullname');
+			$user->age = Input::get('age');
+			$user->gender = Input::get('gender');
+			$user->weight = Input::get('weight');
+			$user->height = Input::get('height');
+			$user->email = Input::get('email');
+			$user->phone = Input::get('phone');
+			$user->password = Hash::make(Input::get('password'));
+			$user->save();
+		}
+	}
+
+	public function showlogin() {
+		if(!Auth::check()) {
+			return View::make('login');
+		}
+	}
+
+	public function dologin() {
+		$userdata = [
+			'email' => Input::get('email'),
+			'password' => Input::get('password')
+		];
+		if(Auth::attempt($userdata)) {
+			return Redirect::action('HomeController@landingpage');
+		}
 	}
 
 }

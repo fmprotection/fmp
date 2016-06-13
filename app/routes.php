@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@landingpage');
+Route::get('/signup', 'HomeController@showsignup');
+Route::post('/signup', 'HomeController@dosignup');
+Route::get('/login', 'HomeController@showlogin');
+Route::post('/login', 'HomeController@dologin');
+Route::get('/plan', 'EventsController@showsetup');
+Route::post('/plan', 'EventsController@dosetup');
+Route::get('/plan/{id}/inventory', 'EventsController@showdrink');
+Route::post('/plan/{id}/inventory', 'EventsController@adddrink');
+Route::get('/plan/{id}/invite', 'EventsController@showinvite');
+Route::post('/plan/{id}/invite', 'EventsController@sendinvite');
+Route::get('/plan/{id}/serve', 'EventsController@showserve');
+Route::post('/plan/{id}/serve', 'EventsController@doserve');
