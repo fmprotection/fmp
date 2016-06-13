@@ -1,6 +1,13 @@
 <?php
 class EventsController extends BaseController {
 
+	public function index() {
+		if(Auth::check()) {
+			$hostingevents = DB::table('events')->where('host_id', Auth::id())->get();
+			$attendingevents = DB::table('guests')->where('user_id', Auth::id())->get();
+			return View::make('events.index')->with('hostingevents', $hostingevents)->with('attendingevents', $attendingevents);
+		}
+	}
 	public function showsetup() {
 		if(Auth::check()) {
 			return View::make('events.create');
@@ -77,7 +84,7 @@ class EventsController extends BaseController {
 			$drink->eventdrink_id = Input::get('drink');
 			$drink->save();
 
-			$guestid = DB::table('guests')->where('event_id', $id)->where('user_id', Input::get('guest')->pluck('id');
+			$guestid = DB::table('guests')->where('event_id', $id)->where('user_id', Input::get('guest'))->pluck('id');
 			$guest = Guest::find($guestid);
 			$guest->number_of_drinks += 1;
 			$guest->bac = 22;

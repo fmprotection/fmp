@@ -19,6 +19,10 @@ class HomeController extends BaseController {
 		return View::make('landingpage');
 	}
 
+	public function about() {
+		return View::make('about');
+	}
+
 	public function showsignup() {
 		if(!Auth::check()) {
 			return View::make('signup');

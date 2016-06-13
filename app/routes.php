@@ -12,10 +12,13 @@
 */
 
 Route::get('/', 'HomeController@landingpage');
+Route::get('/about', 'HomeController@about');
 Route::get('/signup', 'HomeController@showsignup');
 Route::post('/signup', 'HomeController@dosignup');
 Route::get('/login', 'HomeController@showlogin');
 Route::post('/login', 'HomeController@dologin');
+Route::get('/profile/{id}', 'UsersController@profile');
+Route::get('/events', 'EventsController@index');
 Route::get('/plan', 'EventsController@showsetup');
 Route::post('/plan', 'EventsController@dosetup');
 Route::get('/plan/{id}/inventory', 'EventsController@showdrink');
