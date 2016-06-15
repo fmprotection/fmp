@@ -20,6 +20,7 @@ class CreatePersonalDrinksTable extends Migration {
 			$table->foreign('personal_id')->references('id')->on('personals');
 			$table->string('name');
 			$table->string('percent_alcohol');
+			$table->timestamps();
 		});
 	}
 

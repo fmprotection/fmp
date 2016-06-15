@@ -9,7 +9,11 @@
 	<div class="navbar text-center row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
-				<a href="{{{action('HomeController@landingpage')}}}">Home</a>
+				@if(Auth::check())
+					<a href="{{{action('HomeController@logout')}}}">Log Out</a>
+				@else
+					<a href="{{{action('HomeController@landingpage')}}}">Home</a>
+				@endif
 			</div>
 			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
 				@if(Auth::check())

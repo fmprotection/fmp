@@ -40,7 +40,10 @@ class HomeController extends BaseController {
 			$user->email = Input::get('email');
 			$user->phone = Input::get('phone');
 			$user->password = Hash::make(Input::get('password'));
-			$user->save();
+			if($user->save()) {
+				Session::flash('successMessage', 'Welcome!');
+				return Redirect::action('HomeController@landingpage');
+			}
 		}
 	}
 
@@ -56,6 +59,14 @@ class HomeController extends BaseController {
 			'password' => Input::get('password')
 		];
 		if(Auth::attempt($userdata)) {
+			return Redirect::action('HomeController@landingpage');
+		}
+	}
+
+	public function logout() {
+		if(Auth::check()) {
+			Auth::logout();
+			Session::flash('successMessage', 'Goodbye');
 			return Redirect::action('HomeController@landingpage');
 		}
 	}

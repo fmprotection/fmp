@@ -18,7 +18,9 @@ class CreateEventDrinksTable extends Migration {
 			$table->foreign('event_id')->references('id')->on('events');
 			$table->string('name');
 			$table->string('percent_alcohol');
-			$table->string('amount')->nullable();
+			$table->string('size_of_serving');
+			$table->string('amount');
+			$table->timestamps();
 		});
 	}
 
