@@ -7,7 +7,9 @@
 			<label for="drink">What type of drink?</label>
 			<select name="drink">
 				@foreach($drinks as $drink)
-					<option value="{{{$drink->id}}}">{{{$drink->name}}}</option>
+					@if($drink->amount > 0)
+						<option value="{{{$drink->id}}}">{{{$drink->name}}}</option>
+					@endif
 				@endforeach
 			</select>
 		</div>

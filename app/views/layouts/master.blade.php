@@ -3,34 +3,32 @@
 <head>
 	<title>FMP</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/fmp.css">
 	@yield('top-script')
 </head>
 <body>
 	<div class="navbar text-center row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
-				@if(Auth::check())
-					<a href="{{{action('HomeController@logout')}}}">Log Out</a>
-				@else
-					<a href="{{{action('HomeController@landingpage')}}}">Home</a>
-				@endif
+			<div class="logo col-lg-1 col-md-1 col-sm-1 col-xs-1">
+				FMP
 			</div>
-			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-2"></div>
 				@if(Auth::check())
-				<a href="{{{action('UsersController@profile', Auth::id())}}}">Profile</a>
+					<a href="{{{action('HomeController@logout')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Logout</div></a>
 				@else
-				<a href="{{{action('HomeController@showlogin')}}}">Log In</a>
+					<a href="{{{action('HomeController@landingpage')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Home</div></a>
 				@endif
-			</div>
-			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
 				@if(Auth::check())
-				<a href="{{{action('EventsController@index')}}}">Events</a>
+				<a href="{{{action('UsersController@profile')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Profile</div></a>
 				@else
-				<a href="{{{action('HomeController@showsignup')}}}">Signup</a>
+				<a href="{{{action('HomeController@showlogin')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Login</div></a>
 				@endif
-			</div>
-			<div class="navlink col-lg-3 col-md-3 col-sm-3 col-xs-3">
-				<a href="{{{action('HomeController@about')}}}">About</a>
+				@if(Auth::check())
+				<a href="{{{action('EventsController@index')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Events</div></a>
+				@else
+				<a href="{{{action('HomeController@showsignup')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">Signup</div></a>
+				@endif
+				<a href="{{{action('HomeController@about')}}}"><div class="navlink col-lg-1 col-md-1 col-sm-1 col-xs-2">About</div></a>
 			</div>
 		</div>
 	</div>

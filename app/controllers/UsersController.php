@@ -1,9 +1,15 @@
 <?php
 class UsersController extends BaseController {
-	public function profile($id) {
+	public function profile() {
 		if(Auth::check()) {
-			$user = User::find($id);
+			$user = Auth::user();
 			return View::make('profile')->with('user', $user);
+		}
+	}
+
+	public function update() {
+		if(Auth::check()) {
+			$user = User::find(Auth::id());
 		}
 	}
 }

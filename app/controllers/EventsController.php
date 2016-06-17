@@ -61,20 +61,29 @@ class EventsController extends BaseController {
 		$event = Plan::find($id);
 		if(Auth::check() && $event->host_id == Auth::id()) {
 			$dbsearch = DB::table('users')->where('email', Input::get('email'))->pluck('id');
-			if($dbsearch != null) {
-				$guest = new Guest();
-				$guest->event_id = $id;
-				$guest->user_id = $dbsearch;
-				
-				$guest->number_of_drinks = 0;
-				$guest->bac = "0.0";
-				$guest->status = "Sober";
 
-				if($guest->save()) {
-					Session::flash('successMessage', "Guest successfully invited");
-					return Redirect::action('EventsController@showinvite', $id);
+			$guestsearch = DB::table('guests')->where('event_id', $id)->where('user_id', $dbsearch)->get();
+
+			if($dbsearch != null) {
+				if($guestsearch == null) {
+					$guest = new Guest();
+					$guest->event_id = $id;
+					$guest->user_id = $dbsearch;
+					
+					$guest->number_of_drinks = 0;
+					$guest->bac = "0.0";
+					$guest->status = "Sober";
+
+					if($guest->save()) {
+						Session::flash('successMessage', "Guest successfully invited");
+						return Redirect::action('EventsController@showinvite', $id);
+					} else {
+						Session::flash('errorMessage', 'There was an error inviting this guest');
+						return Redirect::back();
+					}
 				} else {
-					Session::flash('errorMessage', 'There was an error inviting this guest');
+					Session::flash('errorMessage', 'You have already invited this guest');
+					return Redirect::back();
 				}
 			} else {
 				Session::flash('errorMessage', 'This user does not exist');
@@ -127,6 +136,10 @@ class EventsController extends BaseController {
 			$drink->guest_id = $userid;
 			$drink->eventdrink_id = Input::get('drink');
 			$drink->save();
+
+			$eventdrink = Eventdrink::find(Input::get('drink'));
+			$eventdrink->amount -= $eventdrink->size_of_serving;
+			$eventdrink->save();
 
 			$guestid = DB::table('guests')->where('event_id', $id)->where('user_id', $userid)->pluck('id');
 			$guest = Guest::find($guestid);

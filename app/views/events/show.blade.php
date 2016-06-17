@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 	<h3 class="text-center">{{{$event->title}}}</h3>
+	<h4 class="text-center">{{{$event->description}}}</h4>
 	<h4 class="text-center">Hosted by: {{{User::find($event->host_id)->fullname}}}</h4>
 	<div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-8 col-sm-offset-1 col-xs-8 col-xs-offset-1">
 		<h4>People Invited:</h4>
@@ -24,7 +25,7 @@
 						@if($guest->status == "Sober")
 							<td><a href="{{{action('EventsController@showserve', array($event->id, $guest->user_id))}}}"><button class="btn btn-success">Serve Drink</button></a></td>
 						@elseif($guest->status == "Ok")
-							<td><a href="{{{action('EventsController@showserve', array($event->id, $guest->user_id))}}}"><button class="btn btn-secondary">Serve Drink</button></a></td>
+							<td><a href="{{{action('EventsController@showserve', array($event->id, $guest->user_id))}}}"><button class="btn btn-slight">Serve Drink</button></a></td>
 						@elseif($guest->status == "Intoxicated")
 							<td><a href="{{{action('EventsController@showserve', array($event->id, $guest->user_id))}}}"><button class="btn btn-warning">Serve Drink</button></a></td>
 						@elseif($guest->status == "Dangerously Intoxicated")

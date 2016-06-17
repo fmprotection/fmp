@@ -1,13 +1,12 @@
 @extends('layouts.master')
 @section('content')
-<div class="col-lg-12 col-lg-offset-1 col-md-12 col-md-offset-1 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1">
+<div class="col-lg-11 col-lg-offset-1 col-md-12 col-md-offset-1 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1">
 	<h3>Events you're hosting</h3>
 	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Title</th>
-				<th>Location</th>
-				<th>Description</th>
+				<th class="hidden-sm hidden-xs">Location</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -16,8 +15,7 @@
 			@foreach($hostingevents as $event)
 				<tr>
 					<th><a href="{{{action('EventsController@show', $event->id)}}}">{{{$event->title}}}</a></th>
-					<td>{{{$event->location}}}</td>
-					<td>{{{$event->description}}}</td>
+					<td class="hidden-sm hidden-xs">{{{$event->location}}}</td>
 					<td><button class="btn btn-success"><a href="{{{action('EventsController@showdrink', $event->id)}}}">Add Drinks</a></button></td>
 					<td><button class="btn btn-secondary"><a href="{{{action('EventsController@showinvite', $event->id)}}}">Invite Guests</a></button></td>
 				</tr>

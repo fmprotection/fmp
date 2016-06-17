@@ -34,7 +34,7 @@
 			<input type="text" name="amount" placeholder="Amount Available">Bottles/Cans/Ounces
 		</div>
 		<div class="form-group">
-			<input type="text" name="size" placeholder="Size of Serving (bottles, ounces, etc.)">Bottles,
+			<input type="text" name="size" placeholder="Size of Serving (bottles, ounces, etc.)">Bottles/Cans/Ounces
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary">Add Drink</button>
