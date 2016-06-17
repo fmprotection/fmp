@@ -11,7 +11,7 @@
 					<th>Name</th>
 					<th># of drinks</th>
 					<th>BAC</th>
-					<th>Status</th>
+					<th class="hidden-xs">Status</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -21,7 +21,7 @@
 						<td>{{{User::find($guest->user_id)->fullname}}}</td>
 						<td>{{{$guest->number_of_drinks}}}</td>
 						<td>{{{$guest->bac}}}</td>
-						<td>{{{$guest->status}}}</td>
+						<td class="hidden-xs">{{{$guest->status}}}</td>
 						@if($guest->status == "Sober")
 							<td><a href="{{{action('EventsController@showserve', array($event->id, $guest->user_id))}}}"><button class="btn btn-success">Serve Drink</button></a></td>
 						@elseif($guest->status == "Ok")
